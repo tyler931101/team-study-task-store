@@ -1,0 +1,68 @@
+<section class="hello-world">
+  <h1>{{ section.settings.greeting }}</h1>
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'paragraph' %}
+        <p>{{ block.settings.text }}</p>
+      {% when 'button' %}
+        <a href="{{ block.settings.url }}" class="btn">
+          {{ block.settings.label }}
+        </a>
+      {% when 'image' %}
+        {% if block.settings.image != blank %}
+          <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.alt | escape }}">
+        {% endif %}
+    {% endcase %}
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Hello World",
+  "settings": [
+    {
+      "type": "text",
+      "id": "greeting",
+      "label": "Greeting Text",
+      "default": "Hello, Shopify!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Paragraph text",
+          "default": "This is my first block inside hello-world."
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Button label", "default": "Click Me" },
+        { "type": "url", "id": "url", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Upload Image" },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "My first image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hello World Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

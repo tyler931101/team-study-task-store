@@ -150,3 +150,43 @@ body {
   margin: 20px auto;
   border-radius: 8px;
 }
+
+.featured-collection {
+  padding: 40px;
+  background: #fafafa;
+}
+
+.featured-collection h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.product-card p {
+  font-weight: bold;
+  color: #333;
+}

@@ -1,0 +1,83 @@
+<section style="padding:3rem 1rem">
+  <div style="display:flex;align-items:center;gap:2rem;max-width:1200px;margin:0 auto;flex-wrap:wrap;flex-direction:{% if section.settings.image_position == 'right' %}row-reverse{% else %}row{% endif %}">
+    <!-- Image -->
+    {% if section.settings.image != blank %}
+      <div style="flex:1;min-width:300px">
+        <img
+          src="{{ section.settings.image | image_url: width: 800 }}"
+          alt="{{ section.settings.heading }}"
+          style="width:100%;border-radius:.5rem"
+        >
+      </div>
+    {% endif %}
+
+    <!-- Text Content -->
+    <div style="flex:1;min-width:300px">
+      <h2 style="font-size:2rem;margin-bottom:1rem">{{ section.settings.heading }}</h2>
+      <p style="margin-bottom:1.5rem">{{ section.settings.text }}</p>
+
+      {% if section.settings.button_label != blank %}
+        <a
+          href="{{ section.settings.button_link }}"
+          style="display:inline-block;padding:.75rem 1.25rem;background:{{ section.settings.button_color }};color:white;text-decoration:none;border-radius:.25rem"
+        >
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text with image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tell your story"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Share something meaningful about your brand or products here."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#333333"
+    }
+  ],
+  "presets": [{ "name": "Rich text with image" }]
+}
+{% endschema %}

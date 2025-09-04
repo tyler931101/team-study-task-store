@@ -1,22 +1,39 @@
-<section class="featured-collection">
-  <h2>{{ section.settings.heading }}</h2>
+<section style="padding:2rem">
+  {% if section.settings.heading != blank %}
+    <h2 style="text-align:center;margin-bottom:1.5rem">
+      {{ section.settings.heading }}
+    </h2>
+  {% endif %}
 
   {% if section.settings.collection != blank %}
-    <div class="product-grid">
-      {% for product in collections[section.settings.collection].products limit: section.settings.limit %}
-        <div class="product-card">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}">
-            <h3>{{ product.title }}</h3>
-            <p>{{ product.price | money }}</p>
+    {% assign coll = collections[section.settings.collection] %}
+
+    {% if coll and coll.products_count > 0 %}
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem">
+        {% for product in coll.products limit: section.settings.limit %}
+          <a
+            href="{{ product.url }}"
+            style="border:1px solid #eee;border-radius:.5rem;padding:1rem;text-decoration:none;color:inherit;display:block;text-align:center"
+          >
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 400 }}"
+                alt="{{ product.title }}"
+                style="max-width:100%;height:auto;border-radius:.5rem;margin-bottom:.5rem"
+              >
+            {% endif %}
+
+            <h3 style="font-size:1rem;margin:.5rem 0">{{ product.title }}</h3>
+            <span>{{ product.price | money }}</span>
           </a>
-        </div>
-      {% else %}
-        <p>No products found in this collection.</p>
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="text-align:center">No products found in this collection.</p>
+    {% endif %}
+
   {% else %}
-    <p>Please select a collection in the settings.</p>
+    <p style="text-align:center">Please select a collection in the section settings.</p>
   {% endif %}
 </section>
 

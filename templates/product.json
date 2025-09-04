@@ -12,9 +12,12 @@
     "main": {
       "type": "product",
       "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations"
     }
   },
   "order": [
-    "main"
+    "main", "recommendations"
   ]
 }

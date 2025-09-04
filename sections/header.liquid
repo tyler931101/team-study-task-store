@@ -1,66 +1,60 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
-
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
+<header style="display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid #eee;gap:2rem;flex-wrap:wrap">
+  <!-- Logo -->
+  <div>
+    <a href="/" style="text-decoration:none;color:inherit;font-weight:bold;font-size:1.25rem">
+      {{ shop.name }}
+    </a>
   </div>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
+  <!-- Navigation -->
+  <nav style="flex-grow:1">
+    <ul style="list-style:none;margin:0;padding:0;display:flex;gap:1rem">
+      {% for link in linklists[section.settings.main_menu].links %}
+        <li>
+          <a href="{{ link.url }}" style="text-decoration:none;color:inherit">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
+  <!-- Search Form -->
+  <form action="/search" method="get" style="display:flex;align-items:center;gap:.5rem">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search products..."
+      style="padding:.4rem .6rem;border:1px solid #ccc;border-radius:.25rem"
+    >
+    <button type="submit" style="padding:.4rem .8rem;background:#333;color:#fff;border:none;border-radius:.25rem">
+      🔍
+    </button>
+  </form>
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
+  <!-- Cart Link -->
+  <div>
+    <a href="/cart" id="cart-icon" style="position:relative;text-decoration:none;color:inherit">
+      🛒
+      <span
+        id="cart-count"
+        style="position:absolute;top:-8px;right:-10px;background:red;color:white;font-size:.75rem;border-radius:50%;padding:2px 6px"
+      >
+        {{ cart.item_count }}
+      </span>
     </a>
   </div>
 </header>
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
-
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Header",
   "settings": [
     {
       "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "id": "main_menu",
+      "label": "Main menu",
+      "default": "main-menu"
     }
-  ]
+  ],
+  "presets": [{ "name": "Header" }]
 }
 {% endschema %}

@@ -1,0 +1,70 @@
+<section style="padding:3rem 1rem;max-width:800px;margin:0 auto">
+  <h1 style="font-size:2rem;margin-bottom:1.5rem">{{ page.title }}</h1>
+
+  {% if page.content != blank %}
+    <div style="margin-bottom:2rem">
+      {{ page.content }}
+    </div>
+  {% endif %}
+
+  <form
+    method="post"
+    action="/contact#ContactForm"
+    id="ContactForm"
+    accept-charset="UTF-8"
+    style="display:grid;gap:1rem"
+  >
+    <input type="hidden" name="form_type" value="contact">
+    <input type="hidden" name="utf8" value="✓">
+
+    <input
+      type="text"
+      name="contact[name]"
+      placeholder="Your name"
+      required
+      style="padding:.75rem;border:1px solid #ccc;border-radius:.25rem"
+    >
+    <input
+      type="email"
+      name="contact[email]"
+      placeholder="Your email"
+      required
+      style="padding:.75rem;border:1px solid #ccc;border-radius:.25rem"
+    >
+    <textarea
+      name="contact[body]"
+      placeholder="Your message"
+      rows="5"
+      required
+      style="padding:.75rem;border:1px solid #ccc;border-radius:.25rem"
+    ></textarea>
+
+    <button
+      type="submit"
+      style="padding:.75rem 1.25rem;background:{{ section.settings.button_color }};color:white;border:none;border-radius:.25rem"
+    >
+      {{ section.settings.button_label }}
+    </button>
+  </form>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "Send message"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#333333"
+    }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

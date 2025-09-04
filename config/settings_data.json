@@ -8,5 +8,11 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "max_page_width": "90rem",
+    "content_for_index": []
+  },
+  "platform_customizations": {
+    "custom_css": []
+  }
 }

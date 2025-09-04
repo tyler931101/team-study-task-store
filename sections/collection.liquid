@@ -1,47 +1,63 @@
-{% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
+<section style="padding:2rem">
+  <h1 style="margin-bottom:1.5rem">{{ collection.title }}</h1>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
-{% endcomment %}
+  {% if collection.description != blank %}
+    <div style="margin-bottom:1.5rem">{{ collection.description }}</div>
+  {% endif %}
 
-<h1>{{ collection.title }}</h1>
+  {% if collection.products_count > 0 %}
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem">
+      {% paginate collection.products by section.settings.products_per_page %}
+        {% for product in collection.products %}
+          <a
+            href="{{ product.url }}"
+            style="border:1px solid #eee;border-radius:.5rem;padding:1rem;text-decoration:none;color:inherit;display:block;text-align:center"
+          >
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 400 }}"
+                alt="{{ product.title }}"
+                style="max-width:100%;height:auto;border-radius:.5rem;margin-bottom:.5rem"
+              >
+            {% endif %}
+            <h3 style="font-size:1rem;margin:.25rem 0">{{ product.title }}</h3>
+            <span>{{ product.price | money }}</span>
+          </a>
+        {% endfor %}
 
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
+        <!-- Pagination -->
+        <div style="margin-top:2rem;text-align:center">
+          {% if paginate.pages > 1 %}
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" style="margin-right:1rem">← Prev</a>
+            {% endif %}
+            Page {{ paginate.current_page }} of {{ paginate.pages }}
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" style="margin-left:1rem">Next →</a>
+            {% endif %}
+          {% endif %}
         </div>
-      </div>
-    {% endfor %}
-
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
-</div>
-
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
-{% endstylesheet %}
+      {% endpaginate %}
+    </div>
+  {% else %}
+    <p>No products found in this collection.</p>
+  {% endif %}
+</section>
 
 {% schema %}
 {
-  "name": "t:general.collection",
-  "settings": []
+  "name": "Main collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ],
+  "presets": [{ "name": "Main collection" }]
 }
 {% endschema %}

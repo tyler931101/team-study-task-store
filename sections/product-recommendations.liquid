@@ -1,0 +1,35 @@
+<section style="padding:2rem">
+  <h2 style="margin-bottom:1.5rem">{{ section.settings.heading }}</h2>
+
+  <div
+    id="product-recommendations"
+    data-product-id="{{ product.id }}"
+    data-limit="{{ section.settings.limit }}"
+  >
+    <p>Loading recommendations...</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Number of products",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [{ "name": "Product recommendations" }]
+}
+{% endschema %}

@@ -11,10 +11,60 @@
   "sections": {
     "main": {
       "type": "hello-world",
-      "settings": {}
-    }
+      "blocks": {
+        "image_YpXJNX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/rupixen-Q59HmzK38eQ-unsplash.jpg",
+            "alt": "My first image"
+          }
+        },
+        "paragraph_yRU8hE": {
+          "type": "paragraph",
+          "settings": {
+            "text": "This is my first block inside hello-world."
+          }
+        },
+        "button_acmWXP": {
+          "type": "button",
+          "settings": {
+            "label": "Click Me",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_YpXJNX",
+        "paragraph_yRU8hE",
+        "button_acmWXP"
+      ],
+      "custom_css": [],
+      "settings": {
+        "greeting": "Hello, Shopify!"
+      }
+    },
+    "featured_collection_nt67YF": {
+      "type": "featured-collection",
+      "name": "Featured Collection",
+      "settings": {
+        "heading": "Our Products",
+        "collection": "automated-collection",
+        "limit": 12
+      }
+    },
+    "testimonials": { "type": "testimonials" },
+    "newsletter": { "type": "newsletter" },
+    "features": { "type": "feature-icons" },
+    "featured_blog": { "type": "featured-blog" },
+    "rich_text_image": { "type": "rich-text-image" }
   },
   "order": [
-    "main"
+    "main",
+    "featured_collection_nt67YF",
+    "testimonials",
+    "newsletter",
+    "features",
+    "featured_blog",
+    "rich_text_image"
   ]
 }

@@ -12,30 +12,15 @@
     "main": {
       "type": "hello-world",
       "blocks": {
-        "image_YpXJNX": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/rupixen-Q59HmzK38eQ-unsplash.jpg",
-            "alt": "My first image"
-          }
-        },
-        "paragraph_yRU8hE": {
-          "type": "paragraph",
-          "settings": {
-            "text": "This is my first block inside hello-world."
-          }
-        },
         "button_acmWXP": {
           "type": "button",
           "settings": {
-            "label": "Click Me",
-            "url": ""
+            "label": "Policy",
+            "url": "shopify://policies/privacy-policy"
           }
         }
       },
       "block_order": [
-        "image_YpXJNX",
-        "paragraph_yRU8hE",
         "button_acmWXP"
       ],
       "custom_css": [],
@@ -52,11 +37,46 @@
         "limit": 12
       }
     },
-    "testimonials": { "type": "testimonials" },
-    "newsletter": { "type": "newsletter" },
-    "features": { "type": "feature-icons" },
-    "featured_blog": { "type": "featured-blog" },
-    "rich_text_image": { "type": "rich-text-image" }
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "What our customers say"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Subscribe to our newsletter",
+        "subheading": "Get updates about new products and special offers.",
+        "button_label": "Subscribe",
+        "button_color": "#ff6600"
+      }
+    },
+    "features": {
+      "type": "feature-icons",
+      "settings": {
+        "heading": "Why shop with us?"
+      }
+    },
+    "featured_blog": {
+      "type": "featured-blog",
+      "settings": {
+        "heading": "Latest from our blog",
+        "blog": "",
+        "article_limit": 3
+      }
+    },
+    "rich_text_image": {
+      "type": "rich-text-image",
+      "settings": {
+        "heading": "Tell your story",
+        "text": "Share something meaningful about your brand or products here.",
+        "image_position": "left",
+        "button_label": "Learn More",
+        "button_link": "shopify://collections/all",
+        "button_color": "#333333"
+      }
+    }
   },
   "order": [
     "main",

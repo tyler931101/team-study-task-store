@@ -14,10 +14,12 @@
       "settings": {}
     },
     "recommendations": {
-      "type": "product-recommendations"
+      "type": "product-recommendations",
+      "settings": {}
     }
   },
   "order": [
-    "main", "recommendations"
+    "main",
+    "recommendations"
   ]
 }

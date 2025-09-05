@@ -18,8 +18,7 @@
 
     <style>
       body {
-        background: url('{{ "background.jpg" | asset_url }}) no-repeat center center fixed;
-        background-size: cover;
+        background: {{ settings.colors_background }};
         color: {{ settings.colors_text }};
         font-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
         margin: 0;
